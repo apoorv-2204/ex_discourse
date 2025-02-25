@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   ex_discourse:
     image: postgres:17.4-alpine3.21
@@ -7,12 +5,12 @@ services:
     restart: unless-stopped
     ports:
       - "5433:5432" # Host port 5433 -> Container port 5432
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: mysecurepassword
-      POSTGRES_DB: discourse_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ex_discourse_dev
 
 volumes:
   postgres_data:
