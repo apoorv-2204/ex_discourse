@@ -36,27 +36,6 @@ config :ex_discourse_web,
   ecto_repos: [ExDiscourse.Repo],
   generators: [context_app: :ex_discourse]
 
-config :git_hooks,
-  auto_install: true,
-  verbose: true,
-  hooks: [
-    pre_commit: [
-      tasks: [
-        {:cmd, "mix format --check-formatted"}
-      ]
-    ],
-    pre_push: [
-      tasks: [
-        {:cmd, "mix clean"},
-        {:cmd, "mix format --check-formatted"},
-        {:cmd, "mix compile --warnings-as-errors"},
-        {:cmd, "mix credo"},
-        {:cmd, "mix test --trace"},
-        {:cmd, "mix dialyzer"}
-      ]
-    ]
-  ]
-
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
