@@ -27,7 +27,8 @@ defmodule ExDiscourse.Umbrella.MixProject do
     [
       # Required to run "mix format" on ~H/.heex files from the umbrella root
       {:phoenix_live_view, ">= 0.0.0"},
-      {:styler, "~> 1.4", only: [:dev, :test], runtime: false}
+      {:styler, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:git_hooks, "~> 0.8.0", only: [:dev], runtime: false}
     ]
   end
 
