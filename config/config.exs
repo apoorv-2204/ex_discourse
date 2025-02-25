@@ -9,22 +9,27 @@
 # move said applications out of the umbrella.
 import Config
 
+# Configure esbuild (the version is required)
+config :esbuild,
+  version: "0.17.11",
+  # Configures the mailer
+  #
+  # By default it uses the "Local" adapter which stores the emails
+  # locally. You can see the emails in your browser, at "/dev/mailbox".
+  #
+  # For production it's recommended to configure a different adapter
+  # at the `config/runtime.exs`.
+  ex_discourse_web: [
+    args: ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+    cd: Path.expand("../apps/ex_discourse_web/assets", __DIR__),
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ]
+
+config :ex_discourse, ExDiscourse.Mailer, adapter: Swoosh.Adapters.Local
+
 # Configure Mix tasks and generators
 config :ex_discourse,
   ecto_repos: [ExDiscourse.Repo]
-
-# Configures the mailer
-#
-# By default it uses the "Local" adapter which stores the emails
-# locally. You can see the emails in your browser, at "/dev/mailbox".
-#
-# For production it's recommended to configure a different adapter
-# at the `config/runtime.exs`.
-config :ex_discourse, ExDiscourse.Mailer, adapter: Swoosh.Adapters.Local
-
-config :ex_discourse_web,
-  ecto_repos: [ExDiscourse.Repo],
-  generators: [context_app: :ex_discourse]
 
 # Configures the endpoint
 config :ex_discourse_web, ExDiscourseWeb.Endpoint,
@@ -37,15 +42,17 @@ config :ex_discourse_web, ExDiscourseWeb.Endpoint,
   pubsub_server: ExDiscourse.PubSub,
   live_view: [signing_salt: "x0BLjJ5U"]
 
-# Configure esbuild (the version is required)
-config :esbuild,
-  version: "0.17.11",
-  ex_discourse_web: [
-    args:
-      ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
-    cd: Path.expand("../apps/ex_discourse_web/assets", __DIR__),
-    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
-  ]
+config :ex_discourse_web,
+  ecto_repos: [ExDiscourse.Repo],
+  generators: [context_app: :ex_discourse]
+
+# Configures Elixir's Logger
+config :logger, :console,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id]
+
+# Use Jason for JSON parsing in Phoenix
+config :phoenix, :json_library, Jason
 
 # Configure tailwind (the version is required)
 config :tailwind,
@@ -58,14 +65,6 @@ config :tailwind,
     ),
     cd: Path.expand("../apps/ex_discourse_web/assets", __DIR__)
   ]
-
-# Configures Elixir's Logger
-config :logger, :console,
-  format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
-
-# Use Jason for JSON parsing in Phoenix
-config :phoenix, :json_library, Jason
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
