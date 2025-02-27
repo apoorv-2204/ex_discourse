@@ -28,7 +28,9 @@ defmodule ExDiscourse.Umbrella.MixProject do
       # Required to run "mix format" on ~H/.heex files from the umbrella root
       {:phoenix_live_view, ">= 0.0.0"},
       {:styler, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:git_hooks, "~> 0.8.0", only: [:dev], runtime: false}
+      {:git_hooks, "~> 0.8.0", only: [:dev], runtime: false},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:sobelow, "~> 0.13", only: [:dev, :test], runtime: false}
     ]
   end
 
@@ -44,7 +46,8 @@ defmodule ExDiscourse.Umbrella.MixProject do
   defp aliases do
     [
       # run `mix setup` in all child apps
-      setup: ["cmd mix setup"]
+      setup: ["cmd mix setup"],
+      sobelow: ["cmd mix sobelow"]
     ]
   end
 end

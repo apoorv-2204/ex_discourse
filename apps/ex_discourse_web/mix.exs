@@ -57,7 +57,8 @@ defmodule ExDiscourseWeb.MixProject do
       {:gettext, "~> 0.26"},
       {:ex_discourse, in_umbrella: true},
       {:jason, "~> 1.2"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:sobelow, "~> 0.13", only: [:dev, :test], runtime: false}
     ]
   end
 
