@@ -17,9 +17,8 @@ defmodule ExDiscourse.AdminNotices.AdminNotice do
     timestamps(type: :naive_datetime_usec)
   end
 
-  @doc false
-  def changeset(admin_notice, attrs) do
-    admin_notice
+  def changeset(struct, attrs) do
+    struct
     |> cast(attrs, @castable_attrs)
     |> validate_required(@required_attrs)
   end
