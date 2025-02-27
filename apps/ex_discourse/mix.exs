@@ -43,7 +43,8 @@ defmodule ExDiscourse.MixProject do
       {:jason, "~> 1.2"},
       {:swoosh, "~> 1.5"},
       {:finch, "~> 0.13"},
-      {:sobelow, "~> 0.13", only: [:dev, :test], runtime: false}
+      {:sobelow, "~> 0.13", only: [:dev, :test], runtime: false},
+      {:faker, "~> 0.18.0", only: :test}
     ]
   end
 

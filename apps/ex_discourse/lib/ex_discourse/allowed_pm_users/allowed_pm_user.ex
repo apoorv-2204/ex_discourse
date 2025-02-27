@@ -1,4 +1,4 @@
-defmodule ExDiscourse.AllowedPMUsers do
+defmodule ExDiscourse.AllowedPMUsers.AllowedPMUser do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset

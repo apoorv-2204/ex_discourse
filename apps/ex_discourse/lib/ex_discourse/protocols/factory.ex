@@ -1,4 +1,4 @@
 defprotocol ExDiscourse.Protocols.Factory do
-  @spec factory(source :: t(), variant :: atom(), attributes :: map, opts :: Keyword.t()) :: t
-  def factory(source, variant, attrs, opts)
+  @spec gen(source :: t(), variant :: atom(), attributes :: map) :: t
+  def gen(source, variant, attrs)
 end
